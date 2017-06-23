@@ -20,10 +20,46 @@
 <p>Projects:&nbsp;<span style="color: #ff6600;"><a style="color: #ff6600;" href="http://azures.us/projects.html">Click here</a></span></p>
 <p>Severs I worked for/working for:&nbsp;<span style="color: #ff6600;"><a style="color: #ff6600;" href="http://azures.us/servers.html">Click here</a></span></p>
 <p>That's it, thanks for reading and have a wonderful day.</p>
-echo "Remote addr: " . $_SERVER['REMOTE_ADDR']."<br/>";
-echo "X Forward: " . $_SERVER['HTTP_X_FORWARDED_FOR']."<br/>";
-echo "Clien IP: " . $_SERVER['HTTP_CLIENT_IP']."<br/>";
-</script>
+<?php
+ $outputWebBug = 'iplog.csv';
+ @ $details = json_decode(file_get_contents("http://ipinfo.io/{$_SERVER['REMOTE_ADDR']}/json"));
+ @ $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+ @ $fileHandle = fopen($outputWebBug, "a");
+ if($fileHandle)
+ {
+  $string = '"'.$QUERY_STRING.'","'
+  .$_SERVER['REMOTE_ADDR'].'","'
+  .$hostname.'","'
+  .$_SERVER['HTTP_SER_AGENT'].'","'
+  .$_SERVER['HTTP_REFERER'].'","'
+  .$details->loc.'","'
+  .$details->org.'","'
+  .$details->city.'","'
+  .$details->region.'","'
+  .$details->country.'","'
+  .date("D dS M,Y h:i a").'"'
+  ."\n"
+  ;
+  $write = fputs($fileHandle, $string);
+  @ fclose($fileHandle);
+ }
+ $string = '<code>'
+  .'<p>'.$QUERY_STRING.'</p><p>IP address:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+  .$_SERVER['REMOTE_ADDR'].'</p><p>Hostname:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+  .$hostname.'</p><p>Browser and OS:&nbsp;'
+  .$_SERVER['HTTP_USER_AGENT'].'</p><p>'
+  .$_SERVER['HTTP_REFERER'].'</p><p>Coordinates:&nbsp;&nbsp;&nbsp;&nbsp;'
+  .$details->log.'</p><p>ISP provider:&nbsp;&nbsp;&nbsp;'
+  .$details->org.'</p><p>City:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+  .$details->city.'</p><p>State:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+  .$details->region.'</p><p>Country:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+  .$details->country.'</p><p>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+  .date("D dS M,Y h:i a").'</p></code>'
+  ;
+ echo '<!DOCTYPE html><html><head><title>Who Am I?</title></head><body>';
+ echo $string;
+ echo '</body></html>';
+?>
   </body>
  </head>
 </html>
