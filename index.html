@@ -1,50 +1,11 @@
-<!DOCTYPE html>
+<?php
 <html>
- <head>
-  <body style="background-color:Black;">
-  <style>
-position:  fixed;
-top:  0;
-width:  auto;
-
-body  {margin:0;}
-
-.navbar {
-  overflow: hidden;
-  background-color: #ff0000;
-  position:  fixed;
-  top: 0;
-  width: 100%;
-}
-
-.navbar a {
-  float: left;
-  display: block;
-  color: #12f0offf
-  text-align:  center;
-  padding: 64px 66px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.main {
-  padding: 16px;
-  margin-top: 30px;
-  height:  1500px; 
-}
-</style>
-</head>
-<body>
-
-<div class="navbar">
-  <a href="https://www.youtube.com/channel/UC2MljVX92won6hYWDLvv9_w">YouTube</a>
-</
-div>
-
-<div class="main">
-<div class="main">
-  <h1><center><font face="Courier" color=White"><>AzuresCube<></strong></center></h1>
-<title>AzuresCube</title>
-  </body>
- </head>
-</html>
+<?php
+$file = "ipaddresses.txt"; //turns the text file into a variable
+$f=fopen($file, 'a+'); //opens up the text file for reading and writing
+fwrite($f,$_SERVER['REMOTE_ADDR']."\n"); //writes the IP address to ipaddresses.txt
+fclose($f); //closes ipaddresses.txt for reading and writing
+?>
+<h1>File Not Found</h1>
+</body>
+</html> 
