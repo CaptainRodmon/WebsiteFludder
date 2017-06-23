@@ -20,16 +20,15 @@
 <p>Projects:&nbsp;<span style="color: #ff6600;"><a style="color: #ff6600;" href="http://azures.us/projects.html">Click here</a></span></p>
 <p>Severs I worked for/working for:&nbsp;<span style="color: #ff6600;"><a style="color: #ff6600;" href="http://azures.us/servers.html">Click here</a></span></p>
 <p>That's it, thanks for reading and have a wonderful day.</p>
-<?php
-    $counts = ("counter.txt");
-    $hits = file($counts);
-    $hits[0] ++;
-    $fp = fopen($counts, "w");
-    fputs($fp , "$hits[0]");
-    fclose($fp);
-    header("Content-type: text/javascript");
-    echo "document.write('" . $hits[0] . "');";
-?>
+url:"http://azures.us",
+type: "POST"
+});
+    $.ajax({
+url:"http://count.io/vb/usercount/",
+success: function(data) {
+    alert(data.counts[0].count);
+}
+});
   </body>
  </head>
 </html>
