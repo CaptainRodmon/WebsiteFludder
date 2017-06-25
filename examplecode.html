@@ -1,11 +1,10 @@
 <html>
-<head></head>
-<body>
-<ul> 
+<head>
+<?php
 $content = "some text here";
 $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/myText.txt","wb");
 fwrite($fp,$content);
 fclose($fp);
-</ul> 
+?>
 </body>
 </html>
