@@ -1,8 +1,15 @@
-function download(text, name, type) {
-  var a = document.getElementById("a");
-  var file = new Blob([text], {type: type});
-  a.href = URL.createObjectURL(file);
-  a.download = name;
+<!DOCTYPE html>
+<html>
+ <head>
+  <body>
+    function download(text, name, type) {
+    var a = document.getElementById("a");
+    var file = new Blob([text], {type: type});
+    a.href = URL.createObjectURL(file);
+    a.download = name;
 }
-<a href="" id="a">click here to download your file</a>
-<button onclick="download('file text', 'myfilename.txt', 'text/plain')">Create file</button>
+    <a href="" id="a">click here to download your file</a>
+    <button onclick="download('file text', 'myfilename.txt', 'text/plain')">Create file</button>
+   </body>
+  </head>
+</html>
